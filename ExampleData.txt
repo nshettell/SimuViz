@@ -1,0 +1,23 @@
+#This line will be ignored by Simuviz since it contains a '#'
+So will this # one
+#This is an example file of randomly generated data for a lattice size of 4x4x1
+#There are 2 sites
+#There is 3 frames to be generated
+#None of the new lines are needed, its just for legibility
+
+1 0 1 1 0 1 0 0
+0 0 1 1 0 1 1 0
+1 1 0 1 0 1 1 0
+0 1 0 1 0 1 1 1
+
+
+0 1 1 0 0 1 0 1
+1 0 1 1 0 1 1 1
+0 1 0 0 1 1 0 0
+1 1 0 1 0 1 1 0
+
+
+0 1 0 1 1 1 0 0
+1 1 0 1 0 0 1 1
+0 0 1 1 0 0 1 1
+0 1 0 1 0 1 0 0
