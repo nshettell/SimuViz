@@ -1,0 +1,45 @@
+The general format for lattice files is the following:
+“””
+Lx, Ly, Lz
+
+Bx
+By
+Bz
+
+S1
+S2
+…
+…
+SN
+
+Q1i, Q1j
+Q2i, Q2j
+…
+…
+QNi, QNj
+“””
+
+Lx, Ly and Lz represent the size of the lattice in Bx, By and Bz
+directions respectfully. Bx, By and Bz are basis vectors or your
+given lattice. S1, S2,…,SN are N vectors which represent the site
+locations when the lattice is broken down into its most basic form.
+Q1i,Q1j,Q2i,Q2j,…,QNi,QNj are 2*N locations where a pair {Qmi,Qmj}
+represents the two endpoints of a bond on the most basic form of a lattice.
+
+Notes:
+-A vector should be of the form x, y, z where x,y,z are real numbers.
+For example the zero vector is written as:
+0, 0, 0
+
+-The vectors Bx, By, Bz should not contain any negative numbers.
+This is because a visual error may occur where some of the bonds
+aren’t displayed. This error arises in the method of determining
+the locations of all bonds on the lattice.
+
+-When start_bonds is being used it is assumed that there are no site
+locations listed. Hence, do not add site lcations to those files
+as an unexpected image will occur, or the program will crash.
+
+-The camera assumes the site location and bond locations are close to the origin: 0, 0, 0. 
+
+-The newline characters in the format are critical!
