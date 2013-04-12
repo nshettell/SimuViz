@@ -1,13 +1,8 @@
 def ini_creator(first_frame,final_frame,res,image_type,pov_name):
-    if image_type=="jpg":
-        image="J"
-    else:
-        image="N"
-        
     return """
 ;POV-Ray animation ini file
-;Visual Representation of an Ising model Square Lattice
-;Version 2.2
+;Visual Representation of a Lattice
+;Version 3.0
 ;Author: Nathan Shettell
 
 Antialias=Off
@@ -27,4 +22,4 @@ Final_Clock=1
 
 Cyclic_Animation=on
 Pause_when_Done=off    
-""" %(res[0],res[1],pov_name,image,first_frame,final_frame)
+""" %(res[0],res[1],pov_name,image_type,first_frame,final_frame)

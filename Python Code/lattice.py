@@ -20,26 +20,49 @@ def size(l_info):
     S=[int(p) for p in l]
     return S[0],S[1],S[2]
 ################################################################################
-def site(info):
-    Basis=[]
-    while info[0]!='\n' and info[0]!='\r\n':
-        Basis+=[[float(p) for p in info[0].split()]]
-        info=info[1:]
-    return Basis,info[1:]
-################################################################################
 def vectors(info):
     bx=[float(p) for p in info[0].split()]
     by=[float(p) for p in info[1].split()]
     bz=[float(p) for p in info[2].split()]
     return bx,by,bz
 ################################################################################
-def bonds(info):
-    Bonds=[]
+def index_locator(info,w1,w2):
+    i=0
+    while info[i]!=w1 and info[i]!=w2:
+        i+=1
+    return i
+################################################################################
+def basis(info):
+    Basis=[]
     while info!=[] and info[0]!='\n' and info[0]!='\r\n':
-        temp=info[0].split(',')
-        Bonds+=[([float(p) for p in temp[0].split()],[float(p) for p in temp[1].split()])]
+        Basis+=[[[float(p) for p in i.split()] for i in info[0].split(',')]]
         info=info[1:]
-    return Bonds
+    return Basis
+################################################################################
+def lights(Lx,Ly,Lz,bx,by,bz):
+    L=[]
+    for i in range(-10,Lx+8,16):
+        for j in range(-8,Ly+8,16):
+            for k in range(-8,Lz+8,16):
+                x=i*bx[0]+j*by[0]+k*bz[0]
+                y=i*bx[1]+j*by[1]+k*bz[1]
+                z=i*bx[2]+j*by[2]+k*bz[2]
+                L+=["<%f,%f,%f>" %(x,y,z)]
+    return L
+################################################################################
+def shortest(bond_list):
+    short=((bond_list[0][1][0]-bond_list[0][0][0])**2+\
+           (bond_list[0][1][1]-bond_list[0][0][1])**2+\
+           (bond_list[0][1][2]-bond_list[0][0][2])**2)**0.5
+    for bond_pair in bond_list:
+        temp=((bond_pair[1][0]-bond_pair[0][0])**2+\
+              (bond_pair[1][1]-bond_pair[0][1])**2+\
+              (bond_pair[1][2]-bond_pair[0][2])**2)**0.5
+        short=min(temp,short)
+    return short
+
+
+
 ################################################################################
 def l_dict(Lx,Ly,Lz,bx,by,bz,site):
     D={}
@@ -48,12 +71,6 @@ def l_dict(Lx,Ly,Lz,bx,by,bz,site):
            for i in range(Lx) for j in range(Ly) for k in range(Lz)}
         D.update(u)
     return D
-################################################################################
-def extrema(lattice):
-    mx=max([p[0] for p in lattice])
-    my=max([p[1] for p in lattice])
-    mz=max([p[2] for p in lattice])
-    return mx,my,mz
 ################################################################################
 def bond_list(Lx,Ly,Lz,mx,my,mz,bx,by,bz,bonds):
     B=[]
