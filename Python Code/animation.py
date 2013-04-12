@@ -258,22 +258,22 @@ Lx*Ly*Lz*Frames*T where T is the total number of objects with activity defined o
                             if activity==0 and p_colour_0!='None':
                                 t_factor+=p_trans_0
                                 Plaq=Plaquettes[p]
-                                corner1=Vector(Plaq[0]).translate({tuple(bx):i,tuple(by):j,tuple(bz):k})
-                                for z in range(1,len(Plaq)-1):
-                                    corner2=Vector(Plaq[z]).translate({tuple(bx):i,tuple(by):j,tuple(bz):k})
-                                    corner3=Vector(Plaq[z+1]).translate({tuple(bx):i,tuple(by):j,tuple(bz):k})
-                                    temp=Triangle(corner1,corner2,corner3,p_colour_0,t_factor)
-                                    pov.write(temp.msg())
+                                temp_clist=""
+                                for c in Plaq:
+                                    c=Vector(c).translate({tuple(bx):i,tuple(by):j,tuple(bz):k})
+                                    temp_clist+=",<%f,%f,%f>" %(c[0],c[1],c[2])
+                                temp=Polygon(len(Plaq),temp_clist,p_colour_0,t_factor)
+                                pov.write(temp.msg())
                             #Do other stuff if the activity is one:
                             elif activity==1 and p_colour_1!='None':
                                 t_factor+=p_trans_1
                                 Plaq=Plaquettes[p]
-                                corner1=Vector(Plaq[0]).translate({tuple(bx):i,tuple(by):j,tuple(bz):k})
-                                for z in range(1,len(Plaq)-1):
-                                    corner2=Vector(Plaq[z]).translate({tuple(bx):i,tuple(by):j,tuple(bz):k})
-                                    corner3=Vector(Plaq[z+1]).translate({tuple(bx):i,tuple(by):j,tuple(bz):k})
-                                    temp=Triangle(corner1,corner2,corner3,p_colour_1,t_factor)
-                                    pov.write(temp.msg())
+                                temp_clist=""
+                                for c in Plaq:
+                                    c=Vector(c).translate({tuple(bx):i,tuple(by):j,tuple(bz):k})
+                                    temp_clist+=",<%f,%f,%f>" %(c[0],c[1],c[2])
+                                temp=Polygon(len(Plaq),temp_clist,p_colour_1,t_factor)
+                                pov.write(temp.msg())
             
         #Now everything is added to the image in the frame and end statement is required in the .pov file
         pov.write("#end\n")

@@ -44,17 +44,16 @@ translate %s
 texture{pigment{color %s transmit %f} finish{ambient 0.1 diffuse 0.3 phong 0.6 phong_size 20}}}
 """ %(self.scale,self.rotate,self.center,self.c,self.trans)
 ################################################################################
-class Triangle:
-    def __init__(self,corner1,corner2,corner3,colour,transparency):
-        self.c1='<%f,%f,%f>' %(corner1[0],corner1[1],corner1[2])
-        self.c2='<%f,%f,%f>' %(corner2[0],corner2[1],corner2[2])
-        self.c3='<%f,%f,%f>' %(corner3[0],corner3[1],corner3[2])
+class Polygon:
+    def __init__(self,n,cornerlist,colour,transparency):
+        self.n=n
+        self.cornerlist=cornerlist
         self.c=colour
         self.trans=transparency
     def msg(self):
         return """
-triangle{%s, %s, %s texture{pigment{color %s transmit %f} finish{ambient 0.1 diffuse 0.3 phong 0.6 phong_size 20}}}
-""" %(self.c1,self.c2,self.c3,self.c,self.trans)
+polygon{%d%s texture{pigment{color %s transmit %f} finish{ambient 0.1 diffuse 0.3 phong 0.6 phong_size 20}}}
+""" %(self.n,self.cornerlist,self.c,self.trans)
     
     
 
