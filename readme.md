@@ -3,7 +3,6 @@ Simuviz
 Simuviz is an easy to use is an easy to use image/animation creator which takes advantage of a POV-Ray
 (a ray tracer to visualize the data), Python (to process the data) and ImageMagick (to convert the images into an
 animation).<br> <br> Simuviz aims to provide insight on lattice transformation as the environment is modified. 
-It currently is limited to activity on the lattice sites or the lattice bonds; not both.
 Simuviz was developed with the user and freedom of choice in mind, the user is given a handful of options and
 the code is easy enough to understand (given that the user has some knowledge of python) such that the user can edit
 and make their own changes for any desirable effect POV-Ray has to offer. <br> <br> Developed by [Nathan Shettell] (https://github.com/nshettell),
@@ -31,22 +30,19 @@ pvengine.exe will have to exist in the same folder your data is located). The co
 such that the commands function on command prompt.
 Using Simuviz
 =============
-There are two main functions in animation.py, start_sites and start_bonds. They are very similar, one being
-constructed to deal with lattice activity on the sites and the other on the bonds. Both functions require
-the same input: file_info, lattice_info and directory. The 4th parameter, res, is optional, the default value
-is [1600,1200]. This number represents the resolution of the images outputted. A list of allowed resolutions
-is found in user_questions.py.<br><br>
-directory: The user must input a string which is the desired name of the directory created by Simuviz in the
-current folder. No special characters should be in the string, nor should it be a name of a directory which
-already exists in the folder. <br><br>
+In the animation.py module, the main function which needs to be called is start. The function requires the following
+input: file_info, lattice_info and directory. <br><br>
+file_info: This is the name of the file with the information of the activity on the lattice. The data file is assumed to
+contain exactly (S+B+P)*Lx*Ly*Lz*F data points in the file, where Lx, Ly and Lz correspond to the size of the lattice,
+F is the number of frames and S, B and P correspond to activity points on sites, bonds and plaquettes.
+Python reads the data in the following order: S, B, P, Lx, Ly, Lz, F. Currently, the data in the
+file is assumed to be 0 or 1. Any line in the data file which contains a hashtag (#) will be ignored.<br><br>
 lattice_info: This is the name of the file with the information about the desired lattice; this file must be in
 the same file as the python scripts. The file has a very specific format to be properly analyzed by python,
 for instructions please read *FormatInstructions.docx* located in *Sample Lattice Files*. <br><br>
-file_info: This is the name of the file with the information of the activity on the lattice. The data file is assumed to
-contain exactly Q*Lx*Ly*Lz*F data points in the file, where Lx, Ly and Lz correspond to the size of the lattice, F is the
-number of frames and Q is either the number of sites (if start_sites is used) or number of bonds
-(if start_bonds is used). Python reads the data in the following order: Q, Lx, Ly, Lz, F. Currently, the data in the
-file is assumed to be 0 or 1. Any line in the data file which contains a hashtag (#) will be ignored.
+directory: The user must input a string which is the desired name of the directory created by Simuviz in the
+current folder. No special characters should be in the string, nor should it be a name of a directory which
+already exists in the folder.
 Modifying the Python Code
 =========================
 When the python code is executed the user is prompted about their desired appearence of the lattice. The code only
@@ -60,12 +56,9 @@ Simuviz currently has issues dealing with the following: <br>
 produced (The issue comes from POV-Rays .ini syntax and cannot be fixed). To avoid this, when prompted for the amount
 of processors you want to use make sure you use less than 0.5*n processors, where n is the number of frames.
 For example if you have data for 7 frames, use no more than 3 processors. <br>
--In the lattice file, if the vectors Lx, Ly or Lz contains negative components the image will potentially be missing
-bonds due to the algorithm Simuviz uses to determine the location of the bonds. <br>
 -Python takes advantage of a garbage collector which greatly limits memory capacity; python will crash if there are
-too many calculations to be performed. For safety, the quantity Q*Lx*Ly*Lz*F should be less than 10 million.
+too many calculations to be performed. For safety, the quantity (S+B+P)*Lx*Ly*Lz*F should be less than 10 million.
 To Do
 =====
--Add a third option where the user can have activity on both the lattice sites and the lattice bonds simultaneously.
-Or unify the first two functions into one large function. <br>
 -Extend the allowed data value to be any number in the range [0,1] instead of just 0 or 1.
+-Create an extension of the 2 dimensional plaquettes to 3 dimensional solids.
