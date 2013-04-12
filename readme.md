@@ -60,5 +60,5 @@ For example if you have data for 7 frames, use no more than 3 processors. <br>
 too many calculations to be performed. For safety, the quantity (S+B+P)*Lx*Ly*Lz*F should be less than 10 million.
 To Do
 =====
--Extend the allowed data value to be any number in the range [0,1] instead of just 0 or 1.
+-Extend the allowed data value to be any number in the range [0,1] instead of just 0 or 1.<br>
 -Create an extension of the 2 dimensional plaquettes to 3 dimensional solids.
