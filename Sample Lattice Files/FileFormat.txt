@@ -1,45 +1,64 @@
 The general format for lattice files is the following:
 “””
+F
 Lx, Ly, Lz
 
 Bx
 By
 Bz
 
+#Sites
 S1
 S2
 …
 …
 SN
 
+#Bonds_a (or Bonds_na)
 Q1i, Q1j
 Q2i, Q2j
 …
 …
 QNi, QNj
+
+#Plaquettes
+P1i, P1j,...,P1a
+P2i, P2j,...,P2b
+...
+...
+Pni, Pnj,...,Pnm
 “””
 
-Lx, Ly and Lz represent the size of the lattice in Bx, By and Bz
-directions respectfully. Bx, By and Bz are basis vectors or your
-given lattice. S1, S2,…,SN are N vectors which represent the site
-locations when the lattice is broken down into its most basic form.
-Q1i,Q1j,Q2i,Q2j,…,QNi,QNj are 2*N locations where a pair {Qmi,Qmj}
-represents the two endpoints of a bond on the most basic form of a lattice.
+F represents the number of frames, Lx, Ly and Lz represent the size
+of the lattice in the Bx, By and Bz directions respectfully.
+Bx, By and Bz are basis vectors or your given lattice.
+
+If there are sites on your lattice, please type #Sites (exactly!) and then
+list the location of all of the sites in the same order on the data file:
+S1, S2,…,SN.
+
+If there is bonds with activity on, please type #Bonds_a (exactly!) and then
+list all of the bond pairs as in the above example.
+If there is no activity on bonds, type #Bonds_na and list the bonds in the
+same manner.
+It is required to list bonds in your lattice file. This is because some
+calculations take into account the shortest bond length, if you do not
+want to view the bonds, when the programs prompts you for a colour choice
+select None.
+
+Finally, if there are plaquettes on your lattice, please type #Plaquettes
+(exactly!) and then list all of the plaquettes. Each point in one list
+represents the corners of the plaquette. The program presums that the points
+are ordered such a way where any two points next two each other are
+connected as well as the first and last.
+
 
 Notes:
--A vector should be of the form x, y, z where x,y,z are real numbers.
+-A vector should be of the form x y z where x,y,z are real numbers.
 For example the zero vector is written as:
-0, 0, 0
+0 0 0
 
--The vectors Bx, By, Bz should not contain any negative numbers.
-This is because a visual error may occur where some of the bonds
-aren’t displayed. This error arises in the method of determining
-the locations of all bonds on the lattice.
+-The built in camera options assume that all locations
+are close to the origin: 0 0 0. 
 
--When start_bonds is being used it is assumed that there are no site
-locations listed. Hence, do not add site lcations to those files
-as an unexpected image will occur, or the program will crash.
-
--The camera assumes the site location and bond locations are close to the origin: 0, 0, 0. 
-
--The newline characters in the format are critical!
+-It is critical to follow this exactly, newlines and all!
